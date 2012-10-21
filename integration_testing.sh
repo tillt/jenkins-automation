@@ -26,7 +26,7 @@ xcrun instruments -t /Applications/Xcode.app/Contents/Applications/Instruments.a
 # remove all *.trace files because in most cases they are broken and we don't need them (-> garbage), because we have all necessary information in the log-file
 rm -r $WORKSPACE/*.trace
 
-# create a mail subject including the BuildNumber and the Date (stored in first line of this script)
+# create a nice title including the BuildNumber and the Date (stored in first line of this script)
 SUBJECT="Build:"$BUILD_NUMBER
 SUBJECT=$SUBJECT"Date:"
 SUBJECT=$SUBJECT$NOW
@@ -35,7 +35,7 @@ SUBJECT=$SUBJECT$NOW
 ACTIVE_RUN=$(ls -1t ${WORKSPACE}/TestResults|grep "Run" -m1)
 
 # transform the resulting PLIST into some nice HTML
-xsltproc --stringparam ScreenshotPathPrefix "${ACTIVE_RUN}" --stringparam SmileyPathPrefix "/userContent/TestResults/images/" -output "IntegrationTesting.html" "~/UnitTestScripts/transform.xsl" "Automation Results.plist"
+xsltproc --stringparam Title "${$SUBJECT}" --stringparam ScreenshotPathPrefix "${ACTIVE_RUN}" --stringparam SmileyPathPrefix "/userContent/TestResults/images/" -output "IntegrationTesting.html" "~/UnitTestScripts/transform.xsl" "Automation Results.plist"
 
 if [ $result -ne 0 ] ; then
     # exit this script with 1 to tell Jenkins that this build didn't complete successfully

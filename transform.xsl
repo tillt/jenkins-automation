@@ -8,7 +8,7 @@
 				<link rel="stylesheet" type="text/css" href="/static/f15a856f/css/style.css" />
 			</head>
 			<body>
-				<h1>UIAutomation Test Result Report</h1>
+				<h1>UIAutomation Test Result Report: <xsl:copy-of select="$Title"/></h1>
 				<table border="0" style="width:100%">
 					<tr>
 					<th>Timestamp</th>
