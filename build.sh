@@ -1,5 +1,5 @@
 # CONSTANTS (PLEASE ADJUST FOR THIS JOB)
-# app name prefix
+# project name prefix
 PROJECT_PREFIX="LobotomatRulez"
 # the app's name (compare with product name in Xcode!)
 APPNAME="${PROJECT_PREFIX}_iPad"
@@ -24,8 +24,6 @@ UNITTESTNAME="${APPNAME}_Tests"
 UIAUTOMATIONPREFIX="${WORKSPACE}/${APPNAME}_Tests/${PROJECT_PREFIX}_Integration_Tests"
 # path to UIAutomation root test script (JavaScript-File)
 UIAUTOMATIONTESTPATH="${UIAUTOMATIONPREFIX}/integration_tests.js"
-# the receiver's mail address (for UIAutomation logs)
-MAILTO="sjansen@cellular.de;ttoenshoff@cellular.de"
 
 ## simulator test specifics
 # simulator sdk version for integration tests
@@ -43,7 +41,7 @@ fi
 
 # if the user enabled UIAutomation testing (checkbox in Jenkins), run the tests before building the App
 if [ $UIAutomation_Test == true ]; then
-  RESULT=$(/bin/sh ~/UnitTestScripts/integration_testing.sh $SIMULATORSDK $MAILTO $APPNAME $UIAUTOMATIONPREFIX $UIAUTOMATIONTESTPATH)
+  RESULT=$(/bin/sh ~/UnitTestScripts/integration_testing.sh $SIMULATORSDK $APPNAME $UIAUTOMATIONPREFIX $UIAUTOMATIONTESTPATH)
   if [ $RESULT -ne 0 ]; then
     echo "**** integration testing FAILED ****"
     exit 1
