@@ -1,7 +1,7 @@
 # CONSTANTS (PLEASE ADJUST FOR THIS JOB)
-# project name prefix
+# project name prefix without *.xcodeproj
 PROJECT_PREFIX="LobotomatRulez"
-# the app's name (compare with product name in Xcode!)
+# the app's name (compare with product name in Xcode!) without *.app
 APPNAME="${PROJECT_PREFIX}_iPad"
 # path to *.plist file of this App
 PLISTPATH="$WORKSPACE/$APPNAME-Info.plist"
