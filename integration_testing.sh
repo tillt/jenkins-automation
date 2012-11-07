@@ -6,10 +6,6 @@ UIAUTOMATIONTESTPATH=$4
 
 TESTRESULTSPATH=$UIAUTOMATIONPREFIX/TestResults 
 
-# get the date of the last successful build by the date the changelog-file of the build was created
-# this is important to get all git commits since this date to write releaseNotes
-LASTSUCCESSFUL="$(date -j -f "%s" "$(stat -f %m $WORKSPACE/../lastSuccessful/changelog.xml)")"
-
 # save the date/time at first to be able to compare with the build-time later
 NOW=$(date +%d.%m.%y/%T)
 
@@ -41,5 +37,7 @@ if [ $result -ne 0 ] ; then
     # exit this script with 1 to tell Jenkins that this build didn't complete successfully
     exit 1
 fi
+
+# 
 
 exit 0

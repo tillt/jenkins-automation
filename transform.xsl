@@ -23,7 +23,18 @@
 						<xsl:variable name="Message"><xsl:value-of select="./string[preceding-sibling::key='Message'][1]"/></xsl:variable>
 						<xsl:variable name="Screenshot"><xsl:value-of select="./string[preceding-sibling::key='Screenshot'][1]"/></xsl:variable>
 						<xsl:if test="$LogType = 'Pass' or $LogType = 'Error' or $LogType = 'Fail'">
-							<tr>
+							<xsl:choose>
+                                <xsl:when test="position() mod 2 = 0">
+                                    <xsl:text disable-output-escaping="yes">
+                                        &lt;tr bgcolor="#FFFFFF"&gt;
+                                    </xsl:text>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:text disable-output-escaping="yes">
+                                        &lt;tr bgcolor="#EEEEFF"&gt;
+                                    </xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
 								<td>
 									<xsl:value-of select="translate(translate(date, 'T',' '), 'Z','')"/>
 								</td>
@@ -51,7 +62,9 @@
 										<xsl:text disable-output-escaping="yes"><![CDATA[<img src="]]></xsl:text><xsl:copy-of select="$ScreenshotPathPrefix"/><xsl:copy-of select="$Message"/><xsl:text disable-output-escaping="yes"><![CDATA[.png" width="80px"/>]]></xsl:text>
 									</xsl:if>
 								</td>
-							</tr>
+							<xsl:text disable-output-escaping="yes">
+                                &lt;/tr&gt;
+                            </xsl:text>
 						</xsl:if>
 					</xsl:for-each>
 				</table>

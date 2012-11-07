@@ -29,6 +29,10 @@ UIAUTOMATIONTESTPATH="${UIAUTOMATIONPREFIX}/integration_tests.js"
 # simulator sdk version for integration tests
 SIMULATORSDK="iphonesimulator6.0"
 
+# get the date of the last successful build by the date the changelog-file of the build was created
+# this is important to get all git commits since this date to write releaseNotes
+LASTSUCCESSFUL="$(date -j -f "%s" "$(stat -f %m $WORKSPACE/../lastSuccessful/changelog.xml)")"
+
 # if the user enabled unit testing (checkbox in Jenkins), run the tests before building the App
 if [ $Unit_Logic_Test == true ]; then
   RESULT=$(/bin/sh ~/UnitTestScripts/unit_testing.sh $SIMULATORSDK $UNITTESTNAME)
@@ -47,6 +51,15 @@ if [ $UIAutomation_Test == true ]; then
     exit 1
   fi
   echo "==== integration testing succeeded ===="
+
+  # get the bundleIdentifier from *.plist
+  BUNDLEIDENTIFIER=$(awk -F"[<>]" '/CFBundleIdentifier/ {getline; print $3; exit}' $PLISTPATH)
+  # WRITING RELEASE NOTES
+  # get just the subjects of git commits since the lastSuccessful build-date (created in first line of this script)
+  # remove duplicated entries
+  # for every line in stdout append a "- " before subject and a "<br />" html tag after this line.
+  # write the whole stdout with all commits into a html-file to provide releaseNotes in HockeyKit
+  git log --no-merges --pretty="%s" --since="$LASTSUCCESSFUL" | uniq | while read line; do echo "- ""$line""<br />"; done > /Applications/XAMPP/xamppfiles/htdocs/hockey/$BUNDLEIDENTIFIER/releaseNotes.html
 fi
 
 # clear all artefacts from former builds
