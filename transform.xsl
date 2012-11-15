@@ -42,7 +42,7 @@
 									<xsl:value-of select="position()"/>
 								</td>
 								<td>
-									<xsl:text disable-output-escaping="yes"><![CDATA[<img src="]]></xsl:text><xsl:copy-of select="$SmileyPathPrefix"/><xsl:copy-of select="$LogType"/><xsl:text disable-output-escaping="yes"><![CDATA[.png" width="40px"/>]]></xsl:text>
+									<xsl:text disable-output-escaping="yes"><![CDATA[<img src="]]></xsl:text><xsl:copy-of select="$SmileyPathPrefix"/><xsl:copy-of select="$LogType"/><xsl:text disable-output-escaping="yes"><![CDATA[.png" width="20px"/>]]></xsl:text>
 								</td>
 								<td>
 									<xsl:choose>

@@ -7,10 +7,11 @@ Jenkins UIAutomation Integration
 Build Script
 
 Parameter:
-SimlatorSDK
-AppName
-UIAutomationPrefix
-UIAutomationTestPath
+
+* SimlatorSDK
+* AppName
+* UIAutomationPrefix
+* UIAutomationTestPath
 
 
 Transformer XSLT
