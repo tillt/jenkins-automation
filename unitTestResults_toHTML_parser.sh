@@ -9,8 +9,8 @@
 SOURCE=$1
 DESTINATIONFILE=$2
 
-LINENUMBERSERROR=$(grep "error" UnitTests.rtf | awk -F, 'END{print NR}')
-LINENUMBERSPASSED=$(grep "passed" UnitTests.rtf | awk -F, 'END{print NR}')
+LINENUMBERSERROR=$(grep "error" $SOURCE | awk -F, 'END{print NR}')
+LINENUMBERSPASSED=$(grep "passed" $SOURCE | awk -F, 'END{print NR}')
 TESTSUM=`expr $LINENUMBERSERROR + $LINENUMBERSPASSED`
 
 echo "<html><style type=\"text/css\"><!-- body, table { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px } --> </style><body>" > $DESTINATIONFILE

@@ -8,8 +8,6 @@ echo "Running integration tests - parameters were: ${1} ${2} ${3} ${4}"
 
 TESTRESULTSPATH=$UIAUTOMATIONPREFIX/TestResults 
 
-# save the date/time at first to be able to compare with the build-time later
-NOW=$(date +%d.%m.%y / %T)
 
 # boolean value for testResults
 TESTSUCCESSFUL=false
@@ -24,6 +22,8 @@ xcrun instruments -t /Applications/Xcode.app/Contents/Applications/Instruments.a
 # remove all *.trace files because in most cases they are broken and we don't need them (-> garbage), because we have all necessary information in the log-file
 rm -r $WORKSPACE/*.trace
 
+# save the date/time at first to be able to compare with the build-time later
+NOW=$(date +%d.%m.%y/%T)
 # create a nice title including the BuildNumber and the Date (stored in first line of this script)
 SUBJECT="Build: "$BUILD_NUMBER
 SUBJECT=$SUBJECT" - Date:"
@@ -32,12 +32,8 @@ SUBJECT=$SUBJECT$NOW
 # locating the active run (latest run)
 ACTIVE_RUN=$(ls -1t ${WORKSPACE}/TestResults|grep "Run" -m1)
 
-echo "Transforming results using xsltproc - storing it within: ${WORKSPACE}/TestResults/IntegrationTesting.html\n\n\n"
-
-echo "xsltproc --verbose --stringparam Title \"${SUBJECT}\" --stringparam ScreenshotPathPrefix \"${ACTIVE_RUN}\" --stringparam SmileyPathPrefix \"/userContent/TestResults/images/\" --output \"${WORKSPACE}/TestResults/IntegrationTesting.html\" ~/UnitTestScripts/transform.xsl \"${WORKSPACE}/TestResults/${ACTIVE_RUN}/Automation Results.plist\""
-
 # transform the resulting PLIST into some nice HTML
-xsltproc --verbose --stringparam Title "${SUBJECT}" --stringparam ScreenshotPathPrefix "${ACTIVE_RUN}" --stringparam SmileyPathPrefix "/userContent/TestResults/images/" --output "${WORKSPACE}/TestResults/IntegrationTesting.html" ~/UnitTestScripts/transform.xsl "${WORKSPACE}/TestResults/${ACTIVE_RUN}/Automation Results.plist"
+xsltproc --stringparam Title "${SUBJECT}" --stringparam ScreenshotPathPrefix "${ACTIVE_RUN}" --stringparam SmileyPathPrefix "/userContent/TestResults/images/" --output "${WORKSPACE}/TestResults/IntegrationTesting.html" ~/UnitTestScripts/transform.xsl "${WORKSPACE}/TestResults/${ACTIVE_RUN}/Automation Results.plist"
 
 if [ $result -ne 0 ] ; then
     # exit this script with 1 to tell Jenkins that this build didn't complete successfully
