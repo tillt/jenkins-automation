@@ -5,11 +5,11 @@
 #
 #  Created by Sven Jansen on 14.11.12.
 #
-
 SOURCE=$1
 DESTINATIONFILE=$2
 SPLIT_SOURCE=$3
 
+# split our input file (burger) into 3 pieces - the uppen bun, the beef and the lower bun
 split -p "<<UNIT_TEST_MARKER>>" $SOURCE $SPLIT_SOURCE
 SPLIT_SOURCE=$SPLIT_SOURCE"ab"
 
