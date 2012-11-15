@@ -2,17 +2,25 @@
 ===
 ###Jenkins Testing Integration
 
-jenkins-automation is a toolbox for automated test coverage of iOS apps using the continuous integration server Jenkins. 
+jenkins-automation is a toolbox for automated test coverage of iOS apps using the continuous integration server [Jenkins](http://jenkins-ci.org). 
 
 #####Coverage
 
-* Logic Testing via SenTestingKit
-* Application Testing via SenTestingKit
-* Integration Testing via UIAutomation
+- Logic Testing via SenTestingKit
+- Application Testing via SenTestingKit
+- Integration Testing via UIAutomation
+
+## Prerequisites
+
+- [Jenkins](http://jenkins-ci.org)
+- [Xcode 4.x](https://developer.apple.com/xcode/)
+- [ios-sim](https://github.com/phonegap/ios-sim) 
+
+
+
 
 ## How To Get Started 
 to be filled with content
-
 
 ===
 #####Jenkins Build Script
@@ -54,7 +62,7 @@ Example:
 ===
 #####Integration Testing Transformer Stylesheet
 
-######integration_testing.sh
+######integration_test_result_transform.xsl
 
 
 Parameter:
@@ -63,7 +71,8 @@ Parameter:
 * ScreenshotPathPrefix
 * SmileyPathPrefix
 
-Example - running the transformation:
+Example:
+
 ```
 xsltproc --stringparam Title "FooBar" --stringparam ScreenshotPathPrefix "test/" --stringparam SmileyPathPrefix "foo/" -output out.html transform.xsl Automation\ Results.plist
 ```
