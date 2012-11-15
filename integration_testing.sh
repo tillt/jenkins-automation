@@ -4,10 +4,7 @@ APPNAME=$2
 UIAUTOMATIONPREFIX=$3
 UIAUTOMATIONTESTPATH=$4
 
-echo "Running integration tests - parameters were: ${1} ${2} ${3} ${4}"
-
 TESTRESULTSPATH=$UIAUTOMATIONPREFIX/TestResults 
-
 
 # boolean value for testResults
 TESTSUCCESSFUL=false
@@ -33,13 +30,11 @@ SUBJECT=$SUBJECT$NOW
 ACTIVE_RUN=$(ls -1t ${WORKSPACE}/TestResults|grep "Run" -m1)
 
 # transform the resulting PLIST into some nice HTML
-xsltproc --stringparam Title "${SUBJECT}" --stringparam ScreenshotPathPrefix "${ACTIVE_RUN}" --stringparam SmileyPathPrefix "/userContent/TestResults/images/" --output "${WORKSPACE}/TestResults/IntegrationTesting.html" ~/UnitTestScripts/transform.xsl "${WORKSPACE}/TestResults/${ACTIVE_RUN}/Automation Results.plist"
+xsltproc --stringparam Title "${SUBJECT}" --stringparam ScreenshotPathPrefix "${ACTIVE_RUN}" --stringparam SmileyPathPrefix "/userContent/TestResults/images/" --output "${WORKSPACE}/TestResults/IntegrationTesting.html" ~/UnitTestScripts/integration_test_result_transform.xsl "${WORKSPACE}/TestResults/${ACTIVE_RUN}/Automation Results.plist"
 
 if [ $result -ne 0 ] ; then
     # exit this script with 1 to tell Jenkins that this build didn't complete successfully
     exit 1
 fi
-
 # 
-
 exit 0
