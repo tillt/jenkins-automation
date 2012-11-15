@@ -8,9 +8,13 @@
 
 SOURCE=$1
 DESTINATIONFILE=$2
+SPLIT_SOURCE=$3
 
-LINENUMBERSERROR=$(grep "error" $SOURCE | awk -F, 'END{print NR}')
-LINENUMBERSPASSED=$(grep "passed" $SOURCE | awk -F, 'END{print NR}')
+split -p "<<UNIT_TEST_MARKER_START>>" $SOURCE $SPLIT_SOURCE
+SPLIT_SOURCE=$SPLIT_SOURCE"ab"
+
+LINENUMBERSERROR=$(grep "error" $SPLIT_SOURCE | awk -F, 'END{print NR}')
+LINENUMBERSPASSED=$(grep "passed" $SPLIT_SOURCE | awk -F, 'END{print NR}')
 TESTSUM=`expr $LINENUMBERSERROR + $LINENUMBERSPASSED`
 
 echo "<html><style type=\"text/css\"><!-- body, table { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px } --> </style><body>" > $DESTINATIONFILE
@@ -28,13 +32,13 @@ else
         TR="<tr>"
     fi
     echo "$TR<td>" >> $DESTINATIONFILE
-    echo $(grep "error" $SOURCE | awk NR==$i | grep -o '[^\/]*:[0-9]*:' | grep -o '^[0-9A-Za-z]*.[A-Za-z]') >> $DESTINATIONFILE
+    echo $(grep "error" $SPLIT_SOURCE | awk NR==$i | grep -o '[^\/]*:[0-9]*:' | grep -o '^[0-9A-Za-z]*.[A-Za-z]') >> $DESTINATIONFILE
     echo "</td><td>" >> $DESTINATIONFILE
-    echo $(grep "error" $SOURCE | awk NR==$i | grep -o '[^\/]*:[0-9]*:' | grep -o ':[0-9]*:' | grep -o '[^:][0-9]*') >> $DESTINATIONFILE
+    echo $(grep "error" $SPLIT_SOURCE | awk NR==$i | grep -o '[^\/]*:[0-9]*:' | grep -o ':[0-9]*:' | grep -o '[^:][0-9]*') >> $DESTINATIONFILE
     echo "</td><td>" >> $DESTINATIONFILE
     echo "<font color=\"red\">Error</font></td>" >> $DESTINATIONFILE
     echo "</td><td><i>" >> $DESTINATIONFILE
-    echo $(grep "error" $SOURCE | awk NR==$i | grep -o '] : .*' | cut -c 5-) >> $DESTINATIONFILE
+    echo $(grep "error" $SPLIT_SOURCE | awk NR==$i | grep -o '] : .*' | cut -c 5-) >> $DESTINATIONFILE
 
     echo "</i></td></tr>" >> $DESTINATIONFILE
     done
@@ -52,11 +56,11 @@ else
 TR="<tr>"
 fi
 echo "$TR<td>" >> $DESTINATIONFILE
-echo $(grep "passed" $SOURCE | awk NR==$i | awk -F "[" '{print $2}' | awk -F " " '{print $1}') >> $DESTINATIONFILE
+echo $(grep "passed" $SPLIT_SOURCE | awk NR==$i | awk -F "[" '{print $2}' | awk -F " " '{print $1}') >> $DESTINATIONFILE
 echo "</td><td>" >> $DESTINATIONFILE
-echo $(grep "passed" $SOURCE | awk NR==$i | awk -F "[" '{print $2}' | awk -F "]" '{print $1}' | awk -F " " '{print $2}' | awk -F "]" '{print $1}') >> $DESTINATIONFILE
+echo $(grep "passed" $SPLIT_SOURCE | awk NR==$i | awk -F "[" '{print $2}' | awk -F "]" '{print $1}' | awk -F " " '{print $2}' | awk -F "]" '{print $1}') >> $DESTINATIONFILE
 echo "</td><td>" >> $DESTINATIONFILE
-echo $(grep "passed" $SOURCE | awk NR==$i | awk -F "(" '{print $2}' | awk -F ")" '{print $1}') >> $DESTINATIONFILE
+echo $(grep "passed" $SPLIT_SOURCE | awk NR==$i | awk -F "(" '{print $2}' | awk -F ")" '{print $1}') >> $DESTINATIONFILE
 echo "</td><td>" >> $DESTINATIONFILE
 echo "<font color=\"green\">Passed</font></td>" >> $DESTINATIONFILE
 
