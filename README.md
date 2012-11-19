@@ -109,7 +109,7 @@ At first duplicate the Debug Build Configuration and call it "UnitTest".
 
 ![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/Xcode_BuildConfiguration.png)
 
-It's important to enable i386 as valid architecture for this new Build Settings.
+It's important to enable i386 as valid architecture for these new Build Settings.
 
 ![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/Valid_Archs.png)
 
