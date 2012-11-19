@@ -6,9 +6,9 @@ jenkins-automation is a toolbox for automated test coverage of iOS apps using th
 
 #####Coverage
 
-- Logic Testing via SenTestingKit
-- Application Testing via SenTestingKit
-- Integration Testing via UIAutomation
+- Logic Testing via SenTestingKit (OCUnit)
+- Application Testing via SenTestingKit (OCUnit)
+- Integration (User Interface) Testing via UIAutomation
 
 ## Prerequisites
 
@@ -27,6 +27,22 @@ to be filled with content
 
 ######build.sh
 
+Automatically calls unit_testing.sh and integration_testing.sh
+You may modify some constants in this script:
+
+* PROJECT_PREFIX
+* APPNAME
+* PLISTPATH
+* XCODEPROJECTPATH
+* INHOUSE_SCHEME
+* ADHOC_SCHEME
+* INHOUSE_IPA_NAME
+* ADHOC_IPA_NAME
+* UNITTESTNAME
+* UIAUTOMATIONPREFIX
+* UIAUTOMATIONTESTPATH
+* SIMULATORSDK
+
 ===
 #####Unit Testing Execution Script
 
@@ -42,6 +58,8 @@ Example:
 ```
 /bin/sh unit_testing.sh iphonesimulator MyAppTests
 ```
+![ScreenShot](https://raw.github.com/i-saumitra/Voice-controlled-MP3-Player/master/screenshot.jpg)
+
 ===
 #####Integration Testing Execution Script
 
