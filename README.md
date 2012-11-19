@@ -125,7 +125,7 @@ You have to create a scheme called "UnitTest". This could be a duplicate of the 
 
 ![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/Xcode_Schemes.png)
 
-Make sure to have enabled the test bundle to run in "Build" category (list on the left) and use your Build Configuration "UniTest" for "Test" category.
+Make sure to have enabled the test bundle to run in "Build" category (list on the left) and use your Build Configuration "UnitTest" in "Test" category.
 
 ![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/Xcode_UnitTest.png)
 
