@@ -121,6 +121,7 @@ Last but not least set "Generate Test Coverage Files" and "Instrument Program Fl
 
 
 ##### Schemes
+
 You have to create a scheme called "UnitTest". This could be a duplicate of the Debug-Scheme.
 
 ![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/Xcode_Schemes.png)
@@ -128,6 +129,42 @@ You have to create a scheme called "UnitTest". This could be a duplicate of the 
 Make sure to have enabled the test bundle to run in "Build" category (list on the left) and use your Build Configuration "UnitTest" in "Test" category.
 
 ![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/Xcode_UnitTest.png)
+
+
+##### Targets (Only important to enable Application Tests)
+
+NOTE: if you just like to run Logic Tests, you can skip reading this chapter.
+
+###### Modify Xcode
+
+Disclaimer: changig your Xcode configuration file may prevent you using Xcode! Be careful while make the following changes!
+
+Open this file in some text editor with root previleges:
+_/Developer/Platforms/iPhoneSimulator.platform/Developer/Tools/RunPlatformUnitTests_
+
+Go to line 95 and search for:
+
+```
+Warning ${LINENO} "Skipping tests; the iPhoneSimulator platform does not currently support application-hosted tests (TEST_HOST set)."
+```
+Put some "#" before these lines to disable execution. Now you don't get a warning if you try to run Application Tests from command line.
+
+
+###### Build Phases (Run Script)
+
+Click on your project file in Xcode and choose your Application Test Target in list to edit the Build Phases.
+
+Expand "Rund Script" and put in the following code snipplet:
+
+```
+echo "<<UNIT_TEST_MARKER>>"
+test_bundle_path="$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.$WRAPPER_EXTENSION"
+environment_args="--setenv DYLD_INSERT_LIBRARIES=/../../Library/PrivateFrameworks/IDEBundleInjection.framework/IDEBundleInjection --setenv XCInjectBundle=$test_bundle_path --setenv XCInjectBundleInto=$TEST_HOST"
+ios-sim launch $(dirname $TEST_HOST) $environment_args --args -SenTest All $test_bundle_path
+echo "Finished running tests with ios-sim"
+echo "<<UNIT_TEST_MARKER>>"
+```
+This allows you to run Applications Test with xcodebuild.
 
 ===
 
