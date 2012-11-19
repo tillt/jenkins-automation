@@ -99,6 +99,38 @@ xsltproc --stringparam Title "FooBar" --stringparam ScreenshotPathPrefix "test/"
 
 ===
 
+## Requirements (Xcode)
+
+To be able to use all these scripts, you have to make some modifications in your Xcode project to support testing with OCUnit.
+
+###### Build Configurations
+
+At first duplicate the Debug Build Configuration and call it "UnitTest".
+
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
+
+It's important to enable i386 as valid architecture for this new Build Settings.
+
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
+
+Search for "Test After Build" and set the value to "YES".
+
+Last but not least set "Generate Test Coverage Files" and "Instrument Program Flow" to "YES".
+
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
+
+
+###### Schemes
+You have to create a scheme called "UnitTest". This could be a duplicate of the Debug-Scheme.
+
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
+
+Make sure to have enabled the test bundle to run in "Build" category (list on the left) and use your Build Configuration "UniTest" for "Test" category.
+
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
+
+===
+
 ## Contact
 
 
