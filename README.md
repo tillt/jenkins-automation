@@ -147,14 +147,14 @@ Go to line 95 and search for:
 ```
 Warning ${LINENO} "Skipping tests; the iPhoneSimulator platform does not currently support application-hosted tests (TEST_HOST set)."
 ```
-Put some "#" before these lines to disable execution. Now you don't get a warning if you try to run Application Tests from command line.
+Put some "#" in front of these lines to disable execution. Now you don't get a warning if you try to run Application Tests from command line.
 
 
 ###### Build Phases (Run Script)
 
-Click on your project file in Xcode and choose your Application Test Target in list to edit the Build Phases.
+Click on your project file in Xcode and choose the Application Test Target in list to edit the Build Phases.
 
-Expand "Rund Script" and put in the following code snipplet:
+Expand "Run Script" and put in the following code snipplet:
 
 ```
 echo "<<UNIT_TEST_MARKER>>"
@@ -164,7 +164,7 @@ ios-sim launch $(dirname $TEST_HOST) $environment_args --args -SenTest All $test
 echo "Finished running tests with ios-sim"
 echo "<<UNIT_TEST_MARKER>>"
 ```
-This allows you to run Applications Test with xcodebuild.
+This allows you to run Application Test with xcodebuild.
 
 ===
 
