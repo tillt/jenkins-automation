@@ -60,7 +60,7 @@ Example:
 ```
 HTML result example: 
 
-![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/unitTest_Screenshot.png)
 
 ===
 #####Integration Testing Execution Script
@@ -107,27 +107,27 @@ To be able to use all these scripts, you have to make some modifications in your
 
 At first duplicate the Debug Build Configuration and call it "UnitTest".
 
-![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/Xcode_BuildConfiguration.png)
 
 It's important to enable i386 as valid architecture for this new Build Settings.
 
-![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/Valid_Archs.png)
 
 Search for "Test After Build" and set the value to "YES".
 
 Last but not least set "Generate Test Coverage Files" and "Instrument Program Flow" to "YES".
 
-![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/OtherBuildSettings.png)
 
 
 ###### Schemes
 You have to create a scheme called "UnitTest". This could be a duplicate of the Debug-Scheme.
 
-![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/Xcode_Schemes.png)
 
 Make sure to have enabled the test bundle to run in "Build" category (list on the left) and use your Build Configuration "UniTest" for "Test" category.
 
-![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/Xcode_UnitTest.png)
 
 ===
 
