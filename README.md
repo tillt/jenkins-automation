@@ -59,6 +59,7 @@ Example:
 /bin/sh unit_testing.sh iphonesimulator MyAppTests
 ```
 HTML result example: 
+
 ![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
 
 ===
