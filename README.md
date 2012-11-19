@@ -58,7 +58,8 @@ Example:
 ```
 /bin/sh unit_testing.sh iphonesimulator MyAppTests
 ```
-![ScreenShot](https://raw.github.com/i-saumitra/Voice-controlled-MP3-Player/master/screenshot.jpg)
+HTML result example: 
+![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/unitTest_Screenshot.png)
 
 ===
 #####Integration Testing Execution Script
