@@ -26,8 +26,8 @@
 						<xsl:variable name="LogType"><xsl:value-of select="./string[preceding-sibling::key='LogType'][1]"/></xsl:variable>
 						<xsl:variable name="Message"><xsl:value-of select="./string[preceding-sibling::key='Message'][1]"/></xsl:variable>
 						<xsl:variable name="Screenshot"><xsl:value-of select="./string[preceding-sibling::key='Screenshot'][1]"/></xsl:variable>
-						<xsl:if test="$Type = '4'">
-							<xsl:if test="$LogType = 'Pass' or $LogType = 'Error' or $LogType = 'Fail'">
+						<xsl:if test="$Type = '4' or $Type = '7'">
+							<xsl:if test="($LogType = 'Pass') or (($LogType = 'Error' or $LogType = 'Fail') and $Type = '7')">
                                 <tr>
 									<td>
 										<xsl:value-of select="translate(translate(date, 'T',' '), 'Z','')"/>
