@@ -15,12 +15,14 @@ jenkins-automation is a toolbox for automated test coverage of iOS apps using th
 - [Jenkins](http://jenkins-ci.org)
 - [Xcode 4.x](https://developer.apple.com/xcode/)
 - [ios-sim](https://github.com/phonegap/ios-sim) 
+- [OCUnit2JUnit](https://github.com/ciryon/OCUnit2JUnit)
 
 
 
 
-## How To Get Started 
-to be filled with content
+## How To Get Started
+ 
+First of all install the prerequisites listed above!
 
 ===
 #####Jenkins Build Script
@@ -61,6 +63,8 @@ Example:
 HTML result example: 
 
 ![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/unitTest_Screenshot.png)
+
+Note: Jenkins is already pre-configured to support test results. But this support only covers JUnit test results (xml). After installing OCUnit2JUnit the build script will automatically convert OCUnit test results to JUnit test results and Jenkins will support some really nice charts! 
 
 ===
 #####Integration Testing Execution Script
