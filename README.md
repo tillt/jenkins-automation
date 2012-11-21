@@ -65,6 +65,11 @@ HTML result example:
 ![ScreenShot](https://raw.github.com/lobotomat/jenkins-automation/master/Screenshots/unitTest_Screenshot.png)
 
 Note: Jenkins is already pre-configured to support test results. But this support only covers JUnit test results (xml). After installing OCUnit2JUnit the build script will automatically convert OCUnit test results to JUnit test results and Jenkins will support some really nice charts! 
+If you like to publish these results in Jenkins everything you have to do is to edit your job configuration. Search for "Publish JUnit Test Report" at the bottom of the page and enter:
+
+```
+test-results/*.xml
+```
 
 ===
 #####Integration Testing Execution Script
