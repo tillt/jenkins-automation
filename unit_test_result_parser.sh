@@ -71,10 +71,10 @@ TR="<tr>"
 fi
 echo "$TR<td>" >> $DESTINATIONFILE
 # get the test class
-echo $(grep "passed" $SPLIT_SOURCE | awk NR==$i | awk -F "[" '{print $2}' | awk -F " " '{print $1}') >> $DESTINATIONFILE
+echo $(grep "passed" $SPLIT_SOURCE | awk NR==$i | awk -F "[" '{print $2}' | awk -F " " '{print $1}' | grep -o [^\[]*$) >> $DESTINATIONFILE
 echo "</td><td>" >> $DESTINATIONFILE
 # get the name of test method
-echo $(grep "passed" $SPLIT_SOURCE | awk NR==$i | awk -F "[" '{print $2}' | awk -F "]" '{print $1}' | awk -F " " '{print $2}' | awk -F "]" '{print $1}') >> $DESTINATIONFILE
+echo $(grep "passed" $SPLIT_SOURCE | awk NR==$i | awk -F "-" '{print $2}' | awk -F " " '{print $2}' | awk -F "]" '{print $1}') >> $DESTINATIONFILE
 echo "</td><td>" >> $DESTINATIONFILE
 # get the execution time of this test
 echo $(grep "passed" $SPLIT_SOURCE | awk NR==$i | awk -F "(" '{print $2}' | awk -F ")" '{print $1}') >> $DESTINATIONFILE
