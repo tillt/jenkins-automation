@@ -158,7 +158,7 @@ Put some "#" in front of these lines to disable execution. Now you don't get a w
 
 Click on your project file in Xcode and choose the Application Test Target in list to edit the Build Phases.
 
-Expand "Run Script" and put in the following code snipplet (*unit_testing_build_phase.sh*):
+Expand "Run Script" and put in the following code snipplet ( _unit_testing_build_phase.sh_ ):
 
 ```
 echo "<<UNIT_TEST_MARKER>>"
