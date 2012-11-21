@@ -53,7 +53,12 @@
 									</td>
 									<td>
 										<xsl:if test="$Screenshot != ''">
+											<xsl:element name="a">
+											<xsl:attribute name="href">
+											<xsl:copy-of select="$ScreenshotPathPrefix"/><xsl:copy-of select="$Message"/><xsl:text disable-output-escaping="yes"><![CDATA[.png]]></xsl:text>
+											</xsl:attribute>
 											<xsl:text disable-output-escaping="yes"><![CDATA[<img src="]]></xsl:text><xsl:copy-of select="$ScreenshotPathPrefix"/><xsl:copy-of select="$Message"/><xsl:text disable-output-escaping="yes"><![CDATA[.png" width="80px"/>]]></xsl:text>
+											</xsl:element>
 										</xsl:if>
 									</td>
 	                          	</tr>
