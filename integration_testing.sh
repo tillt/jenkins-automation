@@ -27,8 +27,8 @@ SUBJECT=$SUBJECT" - Date:"
 SUBJECT=$SUBJECT$NOW
 
 # if some tests of UIAutomation fail a Message containing the word "Fail" will be presented in the log-file
-# search for "Fail" and count the number of occurrences
-result=$(grep Fail -F IntegrationTest.log | wc -l)
+# search for "Fail:" and count the number of occurrences
+result=$(grep "Fail:" -F IntegrationTest.log | wc -l)
 
 # locating the active run (latest run)
 ACTIVE_RUN=$(ls -1t ${WORKSPACE}/TestResults|grep "Run" -m1)
