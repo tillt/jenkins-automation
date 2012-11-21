@@ -26,11 +26,15 @@ SUBJECT="Build: "$BUILD_NUMBER
 SUBJECT=$SUBJECT" - Date:"
 SUBJECT=$SUBJECT$NOW
 
+# if some tests of UIAutomation fail a Message containing the word "Fail" will be presented in the log-file
+# search for "Fail" and count the number of occurrences
+result=$(grep Fail -F IntegrationTest.log | wc -l)
+
 # locating the active run (latest run)
 ACTIVE_RUN=$(ls -1t ${WORKSPACE}/TestResults|grep "Run" -m1)
 
 # transform the resulting PLIST into some nice HTML
-xsltproc --stringparam Title "${SUBJECT}" --stringparam ScreenshotPathPrefix "${ACTIVE_RUN}" --stringparam SmileyPathPrefix "/userContent/TestResults/images/" --output "${WORKSPACE}/TestResults/IntegrationTesting.html" ~/UnitTestScripts/integration_test_result_transform.xsl "${WORKSPACE}/TestResults/${ACTIVE_RUN}/Automation Results.plist"
+xsltproc --stringparam Title "${SUBJECT}" --stringparam ScreenshotPathPrefix "${ACTIVE_RUN}/" --stringparam SmileyPathPrefix "/userContent/TestResults/images/" --output "${WORKSPACE}/TestResults/IntegrationTesting.html" ~/UnitTestScripts/integration_test_result_transform.xsl "${WORKSPACE}/TestResults/${ACTIVE_RUN}/Automation Results.plist"
 
 if [ $result -ne 0 ] ; then
     # exit this script with 1 to tell Jenkins that this build didn't complete successfully
