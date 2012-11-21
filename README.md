@@ -141,7 +141,7 @@ NOTE: if you just like to run Logic Tests, you can skip reading this chapter.
 
 ###### Modify Xcode
 
-Disclaimer: changig your Xcode configuration file may prevent you using Xcode! Be careful while make the following changes!
+Disclaimer: changig your Xcode configuration file may prevent you from using Xcode! Be careful while making the following changes!
 
 Open this file in some text editor with root previleges:
 _/Developer/Platforms/iPhoneSimulator.platform/Developer/Tools/RunPlatformUnitTests_
