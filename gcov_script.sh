@@ -35,7 +35,7 @@ else
         EMAILMESSAGE="emailmessageUnitTest.txt"
         echo "Unit Logic Test SUCCEDED"> $EMAILMESSAGE
         echo "Congratulations! You reached $CODECOVERAGE% of CodeCoverage!" >>$EMAILMESSAGE
-        mail -s $SUBJECT $MAILTO < $EMAILMESSAGE
+        #mail -s $SUBJECT $MAILTO < $EMAILMESSAGE
     # or send logfile with untested lines of code
     else
         mail -s $SUBJECT $MAILTO < $LOGFILE
