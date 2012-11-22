@@ -22,8 +22,7 @@ jenkins-automation is a toolbox for automated test coverage of iOS apps using th
 - [Xcode 4.x](https://developer.apple.com/xcode/)
 - [ios-sim](https://github.com/phonegap/ios-sim) 
 - [OCUnit2JUnit](https://github.com/ciryon/OCUnit2JUnit)
-- [GCOVR](https://software.sandia.gov/trac/fast/wiki/gcovr)
-
+- [GCOVR](https://software.sandia.gov/trac/fast/wiki/gcovr) -> Have a look at this [GUIDE](http://blog.octo.com/en/jenkins-quality-dashboard-ios-development/#step2-2) for configuration instructions
 
 
 
