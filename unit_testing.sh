@@ -19,11 +19,11 @@ sh ~/UnitTestScripts/unit_test_result_parser.sh $WORKSPACE/TestResults/UnitTesti
 COVERAGEDIR=$COVERAGEDIR/$UNITTESTS.build/Objects-normal/i386/
 cd $COVERAGEDIR
 # run gcov_script to generate coverage results
-# sh ~/UnitTestScripts/gcov_script.sh #this script is deprecated!!!
+#sh ~/UnitTestScripts/gcov_script.sh
 for srcfile in *.gcno
 do
 # create gcov output for sourcefile and write stdout and stderr to nowhere
 gcov -c -a $srcfile > /dev/null 2> /dev/null
 done
 
-ruby ~/UnitTestScripts/gcovr . --object-directory $COVERAGEDIR --exclude '.*Test.*' --exclude '.*ExternalFrameworks.*' --xml > $WORKSPACE/coverage/coverage.xml
+ruby ~/UnitTestScripts/gcovr . --object-directory $COVERAGEDIR --exclude '.*Test.*' --exclude '.*ThirdParty.*' --exclude '.*Developer.SDKs.*' --xml > $WORKSPACE/coverage/coverage.xml
