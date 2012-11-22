@@ -43,6 +43,7 @@ NOW=$(date +%d.%m.%y/%T)
 ## UNIT TESTS
 ##
 # if the user enabled unit testing (checkbox in Jenkins), run the tests before building the App
+# use $APPNAME to get code coverage results of your *.m files
 if [ $Unit_Logic_Test == true ]; then
   RESULT=$(/bin/sh ~/UnitTestScripts/unit_testing.sh $SIMULATORSDK $APPNAME)
   if [ $RESULT -ne 0 ]; then
