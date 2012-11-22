@@ -1,4 +1,10 @@
-# jenkins-automation
+# jenkins-automation 0.2beta
+
+
+Note: the following scripts are deprecated since version 0.2beta!
+- check-coverage.pl
+- gcov_script.sh
+
 ===
 ###Jenkins Testing Integration
 
@@ -16,6 +22,7 @@ jenkins-automation is a toolbox for automated test coverage of iOS apps using th
 - [Xcode 4.x](https://developer.apple.com/xcode/)
 - [ios-sim](https://github.com/phonegap/ios-sim) 
 - [OCUnit2JUnit](https://github.com/ciryon/OCUnit2JUnit)
+- [GCOVR](https://software.sandia.gov/trac/fast/wiki/gcovr)
 
 
 

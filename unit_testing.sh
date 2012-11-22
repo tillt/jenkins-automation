@@ -3,7 +3,9 @@ SIMULATORSDK=$1
 UNITTESTS=$2
 
 # Path to code coverage files
-COVERAGEDIR=$(xcodebuild -scheme UnitTest -sdk $SIMULATORSDK -configuration Coverage TEST_AFTER_BUILD=YES ONLY_ACTIVE_ARCH=NO -showBuildSettings | grep CONFIGURATION_TEMP_DIR -m1 | grep -o '/.\+$')
+COVERAGEDIR=$(xcodebuild -scheme UnitTest -sdk $SIMULATORSDK -configuration UnitTest TEST_AFTER_BUILD=YES ONLY_ACTIVE_ARCH=NO -showBuildSettings | grep CONFIGURATION_TEMP_DIR -m1 | grep -o '/.\+$')
+echo "COVERAGE_DIR"
+echo $COVERAGEDIR
 # kill Simulator
 sh ~/UnitTestScripts/kill_simulator.sh
 # run unit tests
@@ -17,4 +19,11 @@ sh ~/UnitTestScripts/unit_test_result_parser.sh $WORKSPACE/TestResults/UnitTesti
 COVERAGEDIR=$COVERAGEDIR/$UNITTESTS.build/Objects-normal/i386/
 cd $COVERAGEDIR
 # run gcov_script to generate coverage results
-sh ~/UnitTestScripts/gcov_script.sh
+#sh ~/UnitTestScripts/gcov_script.sh
+for srcfile in *.gcno
+do
+# create gcov output for sourcefile and write stdout and stderr to nowhere
+gcov -c -a $srcfile > /dev/null 2> /dev/null
+done
+
+ruby ~/UnitTestScripts/gcovr . --object-directory $COVERAGEDIR --exclude '.*Test.*' --exclude '.*ExternalFrameworks.*' --xml > $WORKSPACE/coverage/coverage.xml

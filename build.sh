@@ -44,7 +44,7 @@ NOW=$(date +%d.%m.%y/%T)
 ##
 # if the user enabled unit testing (checkbox in Jenkins), run the tests before building the App
 if [ $Unit_Logic_Test == true ]; then
-  RESULT=$(/bin/sh ~/UnitTestScripts/unit_testing.sh $SIMULATORSDK $UNITTESTNAME)
+  RESULT=$(/bin/sh ~/UnitTestScripts/unit_testing.sh $SIMULATORSDK $APPNAME)
   if [ $RESULT -ne 0 ]; then
     echo "**** unit testing FAILED ****"
     exit 1

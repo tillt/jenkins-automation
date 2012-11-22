@@ -19,6 +19,9 @@
 # http://ansuz.sooke.bc.ca/
 # mskala@ansuz.sooke.bc.ca
 
+
+# this script is deprecated! Please use GCOVR!
+
 $snherror=0;
 
 $longest=5;
