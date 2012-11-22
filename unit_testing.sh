@@ -19,7 +19,7 @@ sh ~/UnitTestScripts/unit_test_result_parser.sh $WORKSPACE/TestResults/UnitTesti
 COVERAGEDIR=$COVERAGEDIR/$UNITTESTS.build/Objects-normal/i386/
 cd $COVERAGEDIR
 # run gcov_script to generate coverage results
-#sh ~/UnitTestScripts/gcov_script.sh
+# sh ~/UnitTestScripts/gcov_script.sh #this script is deprecated!!!
 for srcfile in *.gcno
 do
 # create gcov output for sourcefile and write stdout and stderr to nowhere
