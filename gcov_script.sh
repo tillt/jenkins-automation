@@ -6,6 +6,9 @@
 #  Created by Sven Jansen on 12.10.12.
 #
 
+# this script is deprecated! Please use GCOVR!
+
+
 #!/bin/sh
 
 # constants
