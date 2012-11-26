@@ -22,8 +22,12 @@ UNITTESTNAME="${APPNAME}Tests"
 ## integration test specifics
 # subfolder within project that contains the integration tests
 UIAUTOMATIONPREFIX="${WORKSPACE}/${PROJECT_PREFIX}IntegrationTests"
-# path to UIAutomation root test script (JavaScript-File)
-UIAUTOMATIONTESTPATH="${UIAUTOMATIONPREFIX}/integration_tests.js"
+# path to UIAutomation root test script (JavaScript-File) -> name without *.js suffix!!!
+# if you like to test universal apps you have to provide two integration test files.
+# one with "_iphone.js" suffix and another one with "_ipad.js"
+UIAUTOMATIONTESTPATH="${UIAUTOMATIONPREFIX}/integration_tests"
+# flag to switch between universal or iPhone/iPad-only app (1 or 0)
+IS_UNIVERSAL=0
 
 ## simulator test specifics
 # simulator sdk version for integration tests
@@ -58,7 +62,7 @@ fi
 ##
 # if the user enabled UIAutomation testing (checkbox in Jenkins), run the tests before building the App
 if [ $UIAutomation_Test == true ]; then
-  RESULT=$(/bin/sh ~/UnitTestScripts/integration_testing.sh $SIMULATORSDK $APPNAME $UIAUTOMATIONPREFIX $UIAUTOMATIONTESTPATH)
+  RESULT=$(/bin/sh ~/UnitTestScripts/integration_testing.sh $SIMULATORSDK $APPNAME $UIAUTOMATIONPREFIX $UIAUTOMATIONTESTPATH $IS_UNIVERSAL)
   if [ $RESULT -ne 0 ]; then
     echo "**** integration testing FAILED ****"
     exit 1
