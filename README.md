@@ -189,4 +189,10 @@ This allows you to run Application Test with xcodebuild.
 ### Creators
 
 [Sven Jansen](http://github.com/macsven)  
-[Till Toenshoff](http://github.com/lobotomat)  
+[Till Toenshoff](http://github.com/lobotomat) 
+
+===
+
+## Known Issues 
+
+- folders required to support test result files (html, xml) aren't created automatically. So your build will fail until you have created folders called "coverage" and "TestResults" in your workspace directory. Note that these folders will be deleted if you clean the workspace in Jenkins! For now it's recommended to create these folders right in your Xcode project so they will be pushed over git to be available in Jenkins everytime.
