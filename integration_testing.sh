@@ -57,7 +57,7 @@ echo "run iPhone UI Test"
     xcodebuild -arch i386 -configuration Debug -sdk $SIMULATORSDK TARGETED_DEVICE_FAMILY=2 clean build
 
     # run iPad UI Test
-    xcrun instruments -t /Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/PlugIns/AutomationInstrument.bundle/Contents/Resources/Automation.tracetemplate $WORKSPACE/build/Debug-iphonesimulator/$APPNAME.app -e UIASCRIPT ${UIAUTOMATIONTESTPATH}_ipad.js -e UIARESULTSPATH $WORKSPACE/TestResults 1>IntegrationTest_iPad.log
+    xcrun instruments -t /Applications/Xcode.app/Contents/Applications/Instruments.app/Contents/PlugIns/AutomationInstrument.bundle/Contents/Resources/Automation.tracetemplate $WORKSPACE/build/Debug-iphonesimulator/$APPNAME.app -e UIASCRIPT ${UIAUTOMATIONTESTPATH}_ipad.js -e UIARESULTSPATH $WORKSPACE/TestResults 1>IntegrationTest.log
 
 fi
 
