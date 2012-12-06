@@ -20,6 +20,9 @@ SUBJECT=$SUBJECT$NOW
 echo "IS_UNIVERSAL:"
 echo $IS_UNIVERSAL
 
+RESULT_IPAD=0
+RESULT_IPHONE=0
+
 # run Instruments from command line combined with the *.app file and the JavaScript test script. Results for every run in Instruments are stored in $WORKSPACE/TestResults.
 # stdout is passed to an log-File just for this command
 if [ ${IS_UNIVERSAL} -ne 1 ] ; then
@@ -39,7 +42,7 @@ echo "run iPhone UI Test"
 
     # if some tests of UIAutomation fail a Message containing the word "Fail" will be presented in the log-file
     # search for "Fail:" and count the number of occurrences
-    result=$(grep "Fail:" -F IntegrationTest.log | wc -l)
+    RESULT_IPHONE=$(grep "Fail:" -F IntegrationTest_iPhone.log | wc -l)
 
     # locating the active run (latest run)
     ACTIVE_RUN=$(ls -1t ${WORKSPACE}/TestResults|grep "Run" -m1)
@@ -47,10 +50,6 @@ echo "run iPhone UI Test"
     # transform the resulting PLIST into some nice HTML
     xsltproc --stringparam Title "${SUBJECT}" --stringparam ScreenshotPathPrefix "${ACTIVE_RUN}/" --stringparam SmileyPathPrefix "/userContent/TestResults/images/" --output "${WORKSPACE}/TestResults/IntegrationTesting_iPhone.html" ~/UnitTestScripts/integration_test_result_transform.xsl "${WORKSPACE}/TestResults/${ACTIVE_RUN}/Automation Results.plist"
 
-    if [ $result -ne 0 ] ; then
-    # exit this script with 1 to tell Jenkins that this build didn't complete successfully
-    exit 1
-    fi
 
     echo "run iPad UI Test"
     # build the iPad app
@@ -66,7 +65,7 @@ rm -r $WORKSPACE/*.trace
 
 # if some tests of UIAutomation fail a Message containing the word "Fail" will be presented in the log-file
 # search for "Fail:" and count the number of occurrences
-result=$(grep "Fail:" -F IntegrationTest.log | wc -l)
+RESULT_IPAD=$(grep "Fail:" -F IntegrationTest.log | wc -l)
 
 # locating the active run (latest run)
 ACTIVE_RUN=$(ls -1t ${WORKSPACE}/TestResults|grep "Run" -m1)
@@ -74,7 +73,14 @@ ACTIVE_RUN=$(ls -1t ${WORKSPACE}/TestResults|grep "Run" -m1)
 # transform the resulting PLIST into some nice HTML
 xsltproc --stringparam Title "${SUBJECT}" --stringparam ScreenshotPathPrefix "${ACTIVE_RUN}/" --stringparam SmileyPathPrefix "/userContent/TestResults/images/" --output "${WORKSPACE}/TestResults/IntegrationTesting.html" ~/UnitTestScripts/integration_test_result_transform.xsl "${WORKSPACE}/TestResults/${ACTIVE_RUN}/Automation Results.plist"
 
-if [ $result -ne 0 ] ; then
+echo "iPadResult:"
+echo $RESULT_IPAD
+echo "iPhoneResult"
+echo $RESULT_IPHONE
+
+if [ $RESULT_IPAD -ne 0 ] || [ $RESULT_IPHONE -ne 0 ]
+then
+echo "some UI tests failed!"
 # exit this script with 1 to tell Jenkins that this build didn't complete successfully
 exit 1
 fi
