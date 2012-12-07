@@ -14,7 +14,7 @@ split -p "<<UNIT_TEST_MARKER>>" $SOURCE $SPLIT_SOURCE
 SPLIT_SOURCE=$SPLIT_SOURCE"ab"
 
 # get number of lines for different test states
-LINENUMBERSERROR=$(grep "error" $SPLIT_SOURCE | awk -F, 'END{print NR}')
+LINENUMBERSERROR=$(grep "error" $SPLIT_SOURCE | grep -v "cc_extract" | awk -F, 'END{print NR}')
 LINENUMBERSPASSED=$(grep "passed" $SPLIT_SOURCE | awk -F, 'END{print NR}')
 TESTSUM=`expr $LINENUMBERSERROR + $LINENUMBERSPASSED`
 
@@ -40,16 +40,16 @@ else
     fi
     echo "$TR<td>" >> $DESTINATIONFILE
     # get the implementation file where the error occured
-    echo $(grep "error" $SPLIT_SOURCE | awk NR==$i | grep -o '[^\/]*:[0-9]*:' | grep -o '^[0-9A-Za-z]*.[A-Za-z]') >> $DESTINATIONFILE
+    echo $(grep "error" $SPLIT_SOURCE | grep -v "cc_extract" | awk NR==$i | grep -o '[^\/]*:[0-9]*:' | grep -o '^[0-9A-Za-z]*.[A-Za-z]') >> $DESTINATIONFILE
     echo "</td><td>" >> $DESTINATIONFILE
     # get the line number in which the error occured
-    echo $(grep "error" $SPLIT_SOURCE | awk NR==$i | grep -o '[^\/]*:[0-9]*:' | grep -o ':[0-9]*:' | grep -o '[^:][0-9]*') >> $DESTINATIONFILE
+    echo $(grep "error" $SPLIT_SOURCE | grep -v "cc_extract" | awk NR==$i | grep -o '[^\/]*:[0-9]*:' | grep -o ':[0-9]*:' | grep -o '[^:][0-9]*') >> $DESTINATIONFILE
     echo "</td><td>" >> $DESTINATIONFILE
     # just indicate that this test failed
     echo "<font color=\"red\">Error</font></td>" >> $DESTINATIONFILE
     echo "</td><td><i>" >> $DESTINATIONFILE
     # get the result message from OCUnit
-    echo $(grep "error" $SPLIT_SOURCE | awk NR==$i | grep -o '] : .*' | cut -c 5-) >> $DESTINATIONFILE
+    echo $(grep "error" $SPLIT_SOURCE | grep -v "cc_extract" | awk NR==$i | grep -o '] : .*' | cut -c 5-) >> $DESTINATIONFILE
 
     echo "</i></td></tr>" >> $DESTINATIONFILE
     done
