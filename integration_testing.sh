@@ -81,8 +81,9 @@ echo $RESULT_IPHONE
 if [ $RESULT_IPAD -ne 0 ] || [ $RESULT_IPHONE -ne 0 ]
 then
 echo "some UI tests failed!"
-# exit this script with 1 to tell Jenkins that this build didn't complete successfully
-exit 1
+# if you like to mark this build as unstable when tests failed, just print an error and use the Text Finder plugin in Jenkins to search for this string.
+# Alternatively you can use exit 1 to tell Jenkins that this build didn't complete successfully
+echo "UITESTS FAILED!" #exit 1
 fi
 
 exit 0
